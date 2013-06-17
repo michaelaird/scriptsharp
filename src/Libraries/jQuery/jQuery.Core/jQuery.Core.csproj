@@ -69,6 +69,7 @@
     <Compile Include="ObjectIterationCallback.cs" />
     <Compile Include="ArrayIterationCallback.cs" />
     <Compile Include="jQuery.cs" />
+    <Compile Include="DeferredState.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />

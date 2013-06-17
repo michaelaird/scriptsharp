@@ -64,67 +64,43 @@ namespace jQueryApi {
         IDeferred Fail(params Callback[] failCallbacks);
 
         /// <summary>
-        /// Determines whether the deferred object has been rejected.
+        /// Add handlers to be called when the deferred object generates progress notifications.
         /// </summary>
-        /// <returns>true if it has been rejected; false otherwise.</returns>
-        bool IsRejected();
-
-        /// <summary>
-        /// Determines whether the deferred object has been resolved.
-        /// </summary>
-        /// <returns>true if it has been resolved; false otherwise.</returns>
-        bool IsResolved();
-
-        /// <summary>
-        /// Filters or chains deffered objects.
-        /// </summary>
-        /// <param name="successFilter">The filter to invoke when the deferred object is resolved.</param>
+        /// <param name="failCallbacks">The callbacks to invoke (in order).</param>
         /// <returns>The current deferred object.</returns>
-        IDeferred Pipe(jQueryDeferredFilter successFilter);
+        IDeferred Progress(params Action[] progressCallbacks);
 
         /// <summary>
-        /// Filters or chains deffered objects.
+        /// Add handlers to be called when the deferred object generates progress notifications.
         /// </summary>
-        /// <param name="successFilter">The filter to invoke when the deferred object is resolved.</param>
+        /// <param name="failCallbacks">The callbacks to invoke (in order).</param>
+        /// <returns>The current deferred object.</returns>
+        IDeferred Progress(params Callback[] progressCallbacks);
+
+
+        /// <summary>
+        /// Determine the current state of a Deferred object.
+        /// </summary>
+        /// <returns>The current state of the deferred object</returns>
+        DeferredState State();
+
+        /// <summary>
+        /// Add handlers to be called when the deferred object is resolved or rejected, or still in progress.
+        /// If the object has already been resolved or rejected, the handlers are still invoked.
+        /// </summary>
+        /// <param name="doneFilter">The filter to invoke when the deferred object is resolved.</param>
+        /// <returns>The current deferred object.</returns>
+        IDeferred Then(jQueryDeferredFilter doneFilter);
+
+        /// <summary>
+        /// Add handlers to be called when the deferred object is resolved or rejected, or still in progress.
+        /// If the object has already been resolved or rejected, the handlers are still invoked.
+        /// </summary>
+        /// <param name="doneFilter">The filter to invoke when the deferred object is resolved.</param>
         /// <param name="failFilter">The filter to invoke when the deferred object is rejected.</param>
+        /// <param name="progressFilter">The filter to invoke when progress notifications are sent to the deferred.</param>
         /// <returns>The current deferred object.</returns>
-        IDeferred Pipe(jQueryDeferredFilter successFilter, jQueryDeferredFilter failFilter);
-
-        /// <summary>
-        /// Add handlers to be called when the deferred object is resolved or rejected.
-        /// If the object has already been resolved or rejected, the handlers are still invoked.
-        /// </summary>
-        /// <param name="doneCallback">The callback to invoke when the object is resolved.</param>
-        /// <param name="failCallback">The callback to invoke when the object is rejected.</param>
-        /// <returns>The current deferred object.</returns>
-        IDeferred Then(Action doneCallback, Action failCallback);
-
-        /// <summary>
-        /// Add handlers to be called when the deferred object is resolved or rejected.
-        /// If the object has already been resolved or rejected, the handlers are still invoked.
-        /// </summary>
-        /// <param name="doneCallback">The callback to invoke when the object is resolved.</param>
-        /// <param name="failCallback">The callback to invoke when the object is rejected.</param>
-        /// <returns>The current deferred object.</returns>
-        IDeferred Then(Callback doneCallback, Callback failCallback);
-
-        /// <summary>
-        /// Add handlers to be called when the deferred object is resolved or rejected.
-        /// If the object has already been resolved or rejected, the handlers are still invoked.
-        /// </summary>
-        /// <param name="doneCallbacks">The callbacks to invoke when the object is resolved.</param>
-        /// <param name="failCallbacks">The callbacks to invoke when the object is rejected.</param>
-        /// <returns>The current deferred object.</returns>
-        IDeferred Then(Action[] doneCallbacks, Action[] failCallbacks);
-
-        /// <summary>
-        /// Add handlers to be called when the deferred object is resolved or rejected.
-        /// If the object has already been resolved or rejected, the handlers are still invoked.
-        /// </summary>
-        /// <param name="doneCallbacks">The callbacks to invoke when the object is resolved.</param>
-        /// <param name="failCallbacks">The callbacks to invoke when the object is rejected.</param>
-        /// <returns>The current deferred object.</returns>
-        IDeferred Then(Callback[] doneCallbacks, Callback[] failCallbacks);
+        IDeferred Then(jQueryDeferredFilter doneFilter, jQueryDeferredFilter failFilter, jQueryDeferredFilter progressFilter);
     }
 
     /// <summary>
